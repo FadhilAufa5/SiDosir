@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,12 +12,44 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Super Admin
+        User::firstOrCreate(
+            ['email' => 'super@admin.com'],
+            [
+                'name'         => 'Super Admin',
+                'no_karyawan'  => 'ADM-001',
+                'password'     => bcrypt('password'),
+                'role'         => 'admin',
+                'no_hp'        => '081234567890',
+                'status'       => 'aktif',
+            ]
+        );
 
-        User::factory()->create([
-            'name' => 'deto',
-            'email' => 'super@admin.com',
-            'password' => bcrypt('password'),
-        ]);
+        // Customer Services 1
+        User::firstOrCreate(
+            ['email' => 'cs1@sidosir.com'],
+            [
+                'name'         => 'Siti Customer Service',
+                'no_karyawan'  => 'CS-001',
+                'password'     => bcrypt('password'),
+                'role'         => 'customer_services',
+                'no_hp'        => '082345678901',
+                'status'       => 'aktif',
+            ]
+        );
+
+        // Customer Services 2
+        User::firstOrCreate(
+            ['email' => 'cs2@sidosir.com'],
+            [
+                'name'         => 'Rina Pelayanan',
+                'no_karyawan'  => 'CS-002',
+                'password'     => bcrypt('password'),
+                'role'         => 'customer_services',
+                'no_hp'        => '085678901234',
+                'status'       => 'aktif',
+            ]
+        );
+
     }
 }

@@ -1,6 +1,10 @@
 export type User = {
     id: number;
     name: string;
+    no_karyawan: string | null;
+    role: 'admin' | 'customer_services';
+    no_hp: string | null;
+    status: 'aktif' | 'nonaktif';
     email: string;
     avatar?: string;
     email_verified_at: string | null;

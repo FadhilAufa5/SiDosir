@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 
-#[Fillable(['name', 'email', 'password'])]
+#[Fillable(['name', 'no_karyawan', 'email', 'password', 'role', 'no_hp', 'status'])]
 #[Hidden(['password', 'two_factor_secret', 'two_factor_recovery_codes', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -26,9 +26,53 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-            'two_factor_confirmed_at' => 'datetime',
+            'email_verified_at'         => 'datetime',
+            'password'                  => 'hashed',
+            'two_factor_confirmed_at'   => 'datetime',
         ];
+    }
+
+    /**
+     * Semua peminjaman oleh user ini.
+     */
+    public function peminjaman(): HasMany
+    {
+        return $this->hasMany(Peminjaman::class);
+    }
+
+    /**
+     * Riwayat aktivitas user.
+     */
+    public function riwayatArsip(): HasMany
+    {
+        return $this->hasMany(RiwayatArsip::class);
+    }
+
+    /**
+     * Apakah user adalah admin.
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Apakah user adalah customer services.
+     */
+    public function isCustomerServices(): bool
+    {
+        return $this->role === 'customer_services';
+    }
+
+    /**
+     * Label role yang mudah dibaca.
+     */
+    public function getRoleLabelAttribute(): string
+    {
+        return match ($this->role) {
+            'admin'              => 'Admin',
+            'customer_services'  => 'Customer Services',
+            default              => ucfirst($this->role),
+        };
     }
 }

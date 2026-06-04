@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin;
+use App\Http\Controllers\PeminjamanController;
+use App\Http\Middleware\EnsureAdmin;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
@@ -8,9 +11,28 @@ Route::inertia('/', 'welcome', [
 ])->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::inertia('dashboard', 'dashboard')->name('dashboard');
-    Route::inertia('pengajuan', 'pengajuan')->name('pengajuan');
-    Route::inertia('peminjaman', 'peminjaman')->name('peminjaman');
+    Route::get('dashboard', \App\Http\Controllers\DashboardController::class)->name('dashboard');
+
+    // ── Peminjaman (Customer Services) ───────────────
+    Route::get('peminjaman', [PeminjamanController::class, 'index'])->name('peminjaman.index');
+    Route::post('peminjaman', [PeminjamanController::class, 'store'])->name('peminjaman.store');
+
+    // ── Admin Routes ──────────────────────────────────
+    Route::middleware(EnsureAdmin::class)->prefix('admin')->name('admin.')->group(function () {
+
+        // Monitoring Peminjaman
+        Route::get('peminjaman', [Admin\PeminjamanController::class, 'index'])->name('peminjaman.index');
+        Route::post('peminjaman/{peminjaman}/setujui', [Admin\PeminjamanController::class, 'setujui'])->name('peminjaman.setujui');
+        Route::post('peminjaman/{peminjaman}/tolak', [Admin\PeminjamanController::class, 'tolak'])->name('peminjaman.tolak');
+        Route::post('peminjaman/{peminjaman}/kembalikan', [Admin\PeminjamanController::class, 'kembalikan'])->name('peminjaman.kembalikan');
+
+        // Kelola User & Role
+        Route::get('users', [Admin\UserController::class, 'index'])->name('users.index');
+        Route::post('users', [Admin\UserController::class, 'store'])->name('users.store');
+        Route::put('users/{user}', [Admin\UserController::class, 'update'])->name('users.update');
+        Route::delete('users/{user}', [Admin\UserController::class, 'destroy'])->name('users.destroy');
+        Route::post('users/{user}/toggle-status', [Admin\UserController::class, 'toggleStatus'])->name('users.toggle-status');
+    });
 });
 
-require __DIR__.'/settings.php';
+require __DIR__ . '/settings.php';

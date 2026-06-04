@@ -1,60 +1,66 @@
-import { Link } from '@inertiajs/react';
-import { BookOpen, FileDown, FolderGit2, LayoutGrid,Folder } from 'lucide-react';
+import { Link, usePage } from '@inertiajs/react';
+import {
+    LayoutGrid, ClipboardList, Users, Camera, BarChart3,
+} from 'lucide-react';
 import AppLogo from '@/components/app-logo';
-import { NavFooter } from '@/components/nav-footer';
-import { NavMain } from '@/components/nav-main';
+import { NavGrouped } from '@/components/nav-grouped';
 import { NavUser } from '@/components/nav-user';
 import {
-    Sidebar,
-    SidebarContent,
-    SidebarFooter,
-    SidebarHeader,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
+    Sidebar, SidebarContent, SidebarFooter, SidebarHeader,
+    SidebarMenu, SidebarMenuButton, SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { dashboard, pengajuan, peminjaman } from '@/routes';
-import type { NavItem } from '@/types';
+import type { NavGroup, User } from '@/types';
 
-const mainNavItems: NavItem[] = [
+// ── Customer Services Navigation ────────────────────────────
+const csNavGroups: NavGroup[] = [
     {
-        title: 'Dashboard',
-        href: dashboard(),
-        icon: LayoutGrid,
+        label: 'Menu Utama',
+        items: [
+            { title: 'Dashboard',    href: '/dashboard',   icon: LayoutGrid },
+        ],
     },
     {
-        title: 'Pengajuan',
-        href: pengajuan(),
-        icon: BookOpen,
-    },
-    {
-        title: 'Peminjaman',
-        href: peminjaman(),
-        icon: FileDown,
+        label: 'Peminjaman Dosir',
+        items: [
+            { title: 'Catat Peminjaman', href: '/peminjaman', icon: Camera },
+        ],
     },
 ];
 
-const footerNavItems: NavItem[] = [
+// ── Admin Navigation ────────────────────────────────────────
+const adminNavGroups: NavGroup[] = [
     {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: FolderGit2,
+        label: 'Menu Utama',
+        items: [
+            { title: 'Dashboard',    href: '/dashboard',          icon: LayoutGrid },
+        ],
     },
     {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#react',
-        icon: BookOpen,
+        label: 'Monitoring',
+        items: [
+            { title: 'Peminjaman',   href: '/admin/peminjaman',   icon: BarChart3 },
+        ],
+    },
+    {
+        label: 'Pengaturan',
+        items: [
+            { title: 'Kelola User',  href: '/admin/users',        icon: Users },
+        ],
     },
 ];
 
 export function AppSidebar() {
+    const { auth } = usePage<{ auth: { user: User } }>().props;
+    const isAdmin = auth.user.role === 'admin';
+    const navGroups = isAdmin ? adminNavGroups : csNavGroups;
+
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <Link href={dashboard()} prefetch>
+                            <Link href="/dashboard" prefetch>
                                 <AppLogo />
                             </Link>
                         </SidebarMenuButton>
@@ -63,11 +69,10 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems} />
+                <NavGrouped groups={navGroups} />
             </SidebarContent>
 
             <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto" />
                 <NavUser />
             </SidebarFooter>
         </Sidebar>
