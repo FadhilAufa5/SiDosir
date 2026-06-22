@@ -454,10 +454,10 @@ export default function Dashboard({ statistik, peminjamanTerbaru = [], isAdmin =
 
                                                     <Badge 
                                                         className={`font-bold px-2.5 py-0.5 shadow-sm text-xs rounded-full border ${
-                                                            item.status === 'menunggu' ? 'bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-50/80' :
-                                                            item.status === 'dipinjam' ? 'bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-50/80' :
-                                                            item.status === 'ditolak' ? 'bg-red-50 text-red-700 border-red-200 hover:bg-red-50/80' :
-                                                            'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-50/80'
+                                                            item.status === 'menunggu' ? 'bg-blue-50 text-blue-700 border-blue-200 hover:bg-blue-50/80 dark:bg-blue-950/40 dark:text-blue-400 dark:border-blue-900/50' :
+                                                            item.status === 'dipinjam' ? 'bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-50/80 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-900/50' :
+                                                            item.status === 'ditolak' ? 'bg-red-50 text-red-700 border-red-200 hover:bg-red-50/80 dark:bg-red-950/40 dark:text-red-400 dark:border-red-900/50' :
+                                                            'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-50/80 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-900/50'
                                                         }`}
                                                     >
                                                         {item.status.toUpperCase()}

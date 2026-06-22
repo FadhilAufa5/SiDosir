@@ -142,32 +142,32 @@ export default function AdminLaporanIndex({ ringkasan, statistik, perBulan, topC
             label: 'Hari Ini',
             value: ringkasan.hari_ini,
             icon: CalendarDays,
-            color: 'text-violet-600',
-            bg: 'bg-violet-50 border-violet-200',
+            color: 'text-violet-600 dark:text-violet-400',
+            bg: 'bg-violet-50/50 dark:bg-violet-950/20 border-violet-200 dark:border-violet-900/50',
             desc: 'Pengajuan hari ini',
         },
         {
             label: 'Minggu Ini',
             value: ringkasan.minggu_ini,
             icon: TrendingUp,
-            color: 'text-sky-600',
-            bg: 'bg-sky-50 border-sky-200',
+            color: 'text-sky-600 dark:text-sky-400',
+            bg: 'bg-sky-50/50 dark:bg-sky-950/20 border-sky-200 dark:border-sky-900/50',
             desc: '7 hari terakhir',
         },
         {
             label: 'Bulan Ini',
             value: ringkasan.bulan_ini,
             icon: FileText,
-            color: 'text-amber-600',
-            bg: 'bg-amber-50 border-amber-200',
+            color: 'text-amber-600 dark:text-amber-400',
+            bg: 'bg-amber-50/50 dark:bg-amber-950/20 border-amber-200 dark:border-amber-900/50',
             desc: new Date().toLocaleString('id-ID', { month: 'long', year: 'numeric' }),
         },
         {
             label: 'Total Semua',
             value: ringkasan.total,
             icon: CheckCircle2,
-            color: 'text-emerald-600',
-            bg: 'bg-emerald-50 border-emerald-200',
+            color: 'text-emerald-600 dark:text-emerald-400',
+            bg: 'bg-emerald-50/50 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-900/50',
             desc: 'Sepanjang masa',
         },
     ] as const;
@@ -207,7 +207,7 @@ export default function AdminLaporanIndex({ ringkasan, statistik, perBulan, topC
                             <CardContent className="py-4 px-4">
                                 <div className="flex items-center justify-between mb-2">
                                     <p className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{label}</p>
-                                    <div className="p-1.5 rounded-lg bg-white/60">
+                                    <div className="p-1.5 rounded-lg bg-white/60 dark:bg-muted/40">
                                         <Icon className={`h-4 w-4 ${color}`} />
                                     </div>
                                 </div>
@@ -382,7 +382,7 @@ export default function AdminLaporanIndex({ ringkasan, statistik, perBulan, topC
                                             return (
                                                 <tr
                                                     key={cs.id}
-                                                    className={`border-b transition-colors ${isTop ? 'bg-yellow-50/50 hover:bg-yellow-50' : 'hover:bg-muted/20'}`}
+                                                    className={`border-b transition-colors ${isTop ? 'bg-yellow-50/30 dark:bg-yellow-950/20 hover:bg-yellow-50 dark:hover:bg-yellow-950/30' : 'hover:bg-muted/20'}`}
                                                 >
                                                     <td className="px-4 py-4">
                                                         <div className="flex items-center justify-center">
@@ -391,7 +391,7 @@ export default function AdminLaporanIndex({ ringkasan, statistik, perBulan, topC
                                                     </td>
                                                     <td className="px-4 py-4">
                                                         <div className="flex items-center gap-3">
-                                                            <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-bold ${isTop ? 'bg-yellow-100 text-yellow-700' : 'bg-primary/10 text-primary'}`}>
+                                                            <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-bold ${isTop ? 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/40 dark:text-yellow-400' : 'bg-primary/10 text-primary'}`}>
                                                                 {cs.name.charAt(0).toUpperCase()}
                                                             </div>
                                                             <div>
@@ -401,17 +401,17 @@ export default function AdminLaporanIndex({ ringkasan, statistik, perBulan, topC
                                                         </div>
                                                     </td>
                                                     <td className="px-4 py-4 text-center">
-                                                        <span className={`text-xl font-bold ${isTop ? 'text-yellow-600' : 'text-foreground'}`}>
+                                                        <span className={`text-xl font-bold ${isTop ? 'text-yellow-600 dark:text-yellow-400' : 'text-foreground'}`}>
                                                             {cs.peminjaman_count}
                                                         </span>
                                                     </td>
                                                     <td className="px-4 py-4 text-center">
-                                                        <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 text-amber-700 px-2 py-0.5 text-xs font-medium">
+                                                        <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 px-2 py-0.5 text-xs font-medium">
                                                             {cs.dipinjam}
                                                         </span>
                                                     </td>
                                                     <td className="px-4 py-4 text-center">
-                                                        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 text-emerald-700 px-2 py-0.5 text-xs font-medium">
+                                                        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 px-2 py-0.5 text-xs font-medium">
                                                             {cs.dikembalikan}
                                                         </span>
                                                     </td>

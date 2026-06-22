@@ -275,18 +275,18 @@ export default function AdminPeminjamanIndex({ peminjaman, statistik, keyword, f
 
     const getStatusBadge = (status: string) => {
         switch (status) {
-            case 'menunggu': return <span className="inline-flex items-center rounded-full bg-blue-100 text-blue-700 px-2 py-0.5 text-xs font-medium border border-blue-200">Menunggu ACC</span>;
-            case 'dipinjam': return <span className="inline-flex items-center rounded-full bg-amber-100 text-amber-700 px-2 py-0.5 text-xs font-medium border border-amber-200">Dipinjam</span>;
-            case 'dikembalikan': return <span className="inline-flex items-center rounded-full bg-emerald-100 text-emerald-700 px-2 py-0.5 text-xs font-medium border border-emerald-200">Dikembalikan</span>;
-            case 'ditolak': return <span className="inline-flex items-center rounded-full bg-red-100 text-red-700 px-2 py-0.5 text-xs font-medium border border-red-200">Ditolak</span>;
+            case 'menunggu': return <span className="inline-flex items-center rounded-full bg-blue-100 text-blue-700 px-2 py-0.5 text-xs font-medium border border-blue-200 dark:bg-blue-950/40 dark:text-blue-400 dark:border-blue-900/50">Menunggu ACC</span>;
+            case 'dipinjam': return <span className="inline-flex items-center rounded-full bg-amber-100 text-amber-700 px-2 py-0.5 text-xs font-medium border border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-900/50">Dipinjam</span>;
+            case 'dikembalikan': return <span className="inline-flex items-center rounded-full bg-emerald-100 text-emerald-700 px-2 py-0.5 text-xs font-medium border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-900/50">Dikembalikan</span>;
+            case 'ditolak': return <span className="inline-flex items-center rounded-full bg-red-100 text-red-700 px-2 py-0.5 text-xs font-medium border border-red-200 dark:bg-red-950/40 dark:text-red-400 dark:border-red-900/50">Ditolak</span>;
             default: return null;
         }
     };
 
     const statsItems = [
-        { label: 'Menunggu ACC',  value: statistik.menunggu,     color: 'text-blue-600',    bg: 'bg-blue-50 border-blue-200',          icon: Clock },
-        { label: 'Dipinjam',      value: statistik.dipinjam,     color: 'text-amber-600',   bg: 'bg-amber-50 border-amber-200',        icon: FileText },
-        { label: 'Dikembalikan',  value: statistik.dikembalikan, color: 'text-emerald-600', bg: 'bg-emerald-50 border-emerald-200',    icon: CheckCircle2 },
+        { label: 'Menunggu ACC',  value: statistik.menunggu,     color: 'text-blue-600 dark:text-blue-400',    bg: 'bg-blue-50 border-blue-200 dark:bg-blue-950/20 dark:border-blue-900/50',          icon: Clock },
+        { label: 'Dipinjam',      value: statistik.dipinjam,     color: 'text-amber-600 dark:text-amber-400',   bg: 'bg-amber-50 border-amber-200 dark:bg-amber-950/20 dark:border-amber-900/50',        icon: FileText },
+        { label: 'Dikembalikan',  value: statistik.dikembalikan, color: 'text-emerald-600 dark:text-emerald-400', bg: 'bg-emerald-50 border-emerald-200 dark:bg-emerald-950/20 dark:border-emerald-900/50',    icon: CheckCircle2 },
     ] as const;
 
     return (

@@ -279,10 +279,10 @@ function PhotoDialog({ item, open, onClose }: { item: PeminjamanItem; open: bool
 // ─── Badge Status ─────────────────────────────────────────────────────────────
 function StatusBadge({ status }: { status: PeminjamanItem['status'] }) {
     const config = {
-        menunggu:     { label: 'Menunggu ACC', cls: 'bg-blue-100 text-blue-700 border-blue-200' },
-        dipinjam:     { label: 'Dipinjam',      cls: 'bg-amber-100 text-amber-700 border-amber-200' },
-        dikembalikan: { label: 'Dikembalikan',  cls: 'bg-emerald-100 text-emerald-700 border-emerald-200' },
-        ditolak:      { label: 'Ditolak',       cls: 'bg-red-100 text-red-700 border-red-200' },
+        menunggu:     { label: 'Menunggu ACC', cls: 'bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-950/40 dark:text-blue-400 dark:border-blue-900/50' },
+        dipinjam:     { label: 'Dipinjam',      cls: 'bg-amber-100 text-amber-700 border-amber-200 dark:bg-amber-950/40 dark:text-amber-400 dark:border-amber-900/50' },
+        dikembalikan: { label: 'Dikembalikan',  cls: 'bg-emerald-100 text-emerald-700 border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-400 dark:border-emerald-900/50' },
+        ditolak:      { label: 'Ditolak',       cls: 'bg-red-100 text-red-700 border-red-200 dark:bg-red-950/40 dark:text-red-400 dark:border-red-900/50' },
     };
     const { label, cls } = config[status];
     return (
@@ -365,10 +365,10 @@ export default function PeminjamanIndex({ peminjaman, statistik, keyword = '', f
     };
 
     const statsItems = [
-        { label: 'Total Catatan',   value: statistik.total,             color: 'text-foreground',  bg: 'bg-muted/50' },
-        { label: 'Menunggu ACC',    value: statistik.menunggu || 0,     color: 'text-blue-600',    bg: 'bg-blue-50' },
-        { label: 'Sedang Dipinjam', value: statistik.dipinjam,          color: 'text-amber-600',   bg: 'bg-amber-50' },
-        { label: 'Sudah Kembali',   value: statistik.dikembalikan,      color: 'text-emerald-600', bg: 'bg-emerald-50' },
+        { label: 'Total Catatan',   value: statistik.total,             color: 'text-foreground',  bg: 'bg-muted/50 dark:bg-muted/30 border border-border/50' },
+        { label: 'Menunggu ACC',    value: statistik.menunggu || 0,     color: 'text-blue-600 dark:text-blue-400',    bg: 'bg-blue-50/50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/50' },
+        { label: 'Sedang Dipinjam', value: statistik.dipinjam,          color: 'text-amber-600 dark:text-amber-400',   bg: 'bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900/50' },
+        { label: 'Sudah Kembali',   value: statistik.dikembalikan,      color: 'text-emerald-600 dark:text-emerald-400', bg: 'bg-emerald-50/50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-900/50' },
     ];
 
     return (
@@ -393,7 +393,7 @@ export default function PeminjamanIndex({ peminjaman, statistik, keyword = '', f
                 {/* Stats */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {statsItems.map(({ label, value, color, bg }) => (
-                        <Card key={label} className={`border-0 ${bg}`}>
+                        <Card key={label} className={`${bg}`}>
                             <CardContent className="py-3 px-4">
                                 <p className="text-xs text-muted-foreground">{label}</p>
                                 <p className={`text-2xl font-bold ${color}`}>{value}</p>
